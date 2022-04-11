@@ -10,10 +10,12 @@
   "author": "Sellpy",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^3.12.0",
     "cors": "^2.8.5",
     "express": "^4.17.2"
   },
   "devDependencies": {
-    "eslint": "^8.9.0"
+    "eslint": "^8.9.0",
+    "prisma": "^3.12.0"
   }
 }
