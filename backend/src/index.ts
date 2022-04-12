@@ -61,21 +61,27 @@ app.delete('/todo-lists/:id', async (req, res) => {
 
 });
 
-app.post('/todo-lists/:idList/todos', async (req, res) => {
-    const todo = await prisma.todo.create({
-        data: {
-            ...req.body,
-            todoList: {
-                connect: {
-                    id: +req.params.idList
+app.post('/todos', async (req, res) => {
+    try {
+        const todo = await prisma.todo.create({
+            data: {
+                name: req.body.name,
+                completed: false,
+                todoList: {
+                    connect: {
+                        id: Number(req.body.idList)
+                    }
                 }
             }
-        }
-    });
-    res.json(todo);
+        });
+        res.json(todo);
+    } catch (e: any) {
+        console.log(e);
+        res.status(500).send(e.message)
+    }
 });
 
-app.put('/todo-lists/:idList/todos/:id', async (req, res) => {
+app.put('/todos/:id', async (req, res) => {
     const todo = await prisma.todo.update({
         data: req.body,
         where: {
@@ -85,7 +91,7 @@ app.put('/todo-lists/:idList/todos/:id', async (req, res) => {
     res.json(todo);
 });
 
-app.delete('/todo-lists/:idList/todos/:id', async (req, res) => {
+app.delete('/todos/:id', async (req, res) => {
     const todo = await prisma.todo.delete({
         where: {
             id: +req.params.id
