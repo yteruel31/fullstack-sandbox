@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card, CardActions, CardContent, Typography} from '@mui/material'
+import {Button, Card, CardActions, CardContent, Stack, Typography} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import {useGetTodoListQuery} from "../../store/api/todoList.api";
 import {usePostTodoMutation,} from "../../store/api/todo.api";
@@ -20,9 +20,11 @@ export const TodoListForm = ({todoListId}) => {
                     {data.name}
                 </Typography>
                 <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
-                    {data.todos?.map((t, index) => (
-                        <TodoField key={index} data={t} index={index} todoList={todoListId}/>
-                    ))}
+                    <Stack spacing={2}>
+                        {data.todos?.map((t, index) => (
+                            <TodoField key={index} data={t} index={index} todoList={todoListId}/>
+                        ))}
+                    </Stack>
                     <CardActions>
                         <Button
                             type='button'
