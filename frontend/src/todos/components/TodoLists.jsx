@@ -8,7 +8,7 @@ import {
     ListItemIcon,
     Typography,
     Button,
-    TextField, ListItemButton, Stack
+    TextField, ListItemButton, Stack, CircularProgress
 } from '@mui/material'
 import ReceiptIcon from '@mui/icons-material/Receipt'
 import {TodoListForm} from './TodoListForm'
@@ -23,7 +23,7 @@ export const TodoLists = ({style}) => {
     const [addTodoList] = usePostTodoListMutation();
 
     if (isLoading) {
-        return null;
+        return <CircularProgress />;
     }
 
     return <Fragment>

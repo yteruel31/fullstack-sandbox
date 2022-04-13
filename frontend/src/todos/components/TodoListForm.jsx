@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Card, CardActions, CardContent, Stack, Typography} from '@mui/material'
+import {Button, Card, CardActions, CardContent, CircularProgress, Stack, Typography} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import {useGetTodoListQuery} from "../../store/api/todoList.api";
 import {usePostTodoMutation,} from "../../store/api/todo.api";
@@ -10,7 +10,7 @@ export const TodoListForm = ({todoListId}) => {
     const [addTodo] = usePostTodoMutation();
 
     if (isLoading) {
-        return null;
+        return <CircularProgress />
     }
 
     return (
