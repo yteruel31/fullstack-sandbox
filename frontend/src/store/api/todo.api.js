@@ -29,6 +29,7 @@ const todoApi = baseApi.injectEndpoints({
                 body,
                 method: "PUT"
             }),
+            invalidatesTags: ["TodoLists"],
             async onQueryStarted({body, arg}, {dispatch, queryFulfilled}) {
                 const postResult = dispatch(
                     baseApi.util.updateQueryData('getTodoList', arg.idList, (draft) => {
@@ -49,7 +50,7 @@ const todoApi = baseApi.injectEndpoints({
                 url: `/todos/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: (result, err, {idList}) => [{type: "TodoList", id: idList}],
+            invalidatesTags: (result, err, {idList}) => [{type: "TodoList", id: idList}, "TodoLists"],
         })
     }),
 });

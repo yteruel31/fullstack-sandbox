@@ -13,8 +13,22 @@ const PORT = 3001
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/todo-lists', async (req, res) => {
-    const todoLists = await prisma.todoList.findMany();
-    res.json(todoLists);
+    const todoLists = await prisma.todoList.findMany({
+        select: {
+            id: true,
+            name: true,
+            todos: {
+                select: {
+                    completed: true
+                }
+            }
+        }
+    });
+
+    res.json(todoLists.map(l => ({
+        ...l,
+        completed: l.todos.length > 0 && l.todos.every(t => t.completed)
+    })));
 });
 
 app.get('/todo-lists/:id', async (req, res) => {
@@ -26,6 +40,7 @@ app.get('/todo-lists/:id', async (req, res) => {
             todos: true
         }
     });
+
     res.json(todoList);
 });
 
