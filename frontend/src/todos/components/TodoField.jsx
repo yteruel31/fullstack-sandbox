@@ -48,7 +48,7 @@ export const TodoField = ({data, index, todoList}) => {
                     }}
                     renderInput={(params) => <TextField {...params} />}
                 />
-                {data.completionDate && getUntilTime(data.completionDate)}
+                {(data.completionDate && !data.completed) && getUntilTime(data.completionDate)}
             </Stack>
             <Stack direction="row">
                 <Tooltip title="Complete task">
