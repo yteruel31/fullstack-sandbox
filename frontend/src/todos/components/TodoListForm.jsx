@@ -21,7 +21,7 @@ export const TodoListForm = ({todoListId}) => {
                 </Typography>
                 <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1}}>
                     {data.todos?.map((t, index) => (
-                        <TodoField todo={t} index={index} todoList={todoListId}/>
+                        <TodoField key={index} data={t} index={index} todoList={todoListId}/>
                     ))}
                     <CardActions>
                         <Button

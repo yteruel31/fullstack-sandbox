@@ -29,7 +29,20 @@ const todoApi = baseApi.injectEndpoints({
                 body,
                 method: "PUT"
             }),
-            invalidatesTags: (result, err, {arg}) => [{type: "TodoList", id: arg.idList}],
+            async onQueryStarted({body, arg}, {dispatch, queryFulfilled}) {
+                const postResult = dispatch(
+                    baseApi.util.updateQueryData('getTodoList', arg.idList, (draft) => {
+                        console.log(draft)
+                        Object.assign(draft.todos, draft.todos.map(t => t.id === arg.id ? ({...t, ...body}) : t))
+                    })
+                )
+
+                try {
+                    await queryFulfilled
+                } catch {
+                    postResult.undo()
+                }
+            }
         }),
         deleteTodo: build.mutation({
             query: ({id}) => ({
