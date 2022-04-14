@@ -11,16 +11,20 @@ datasource db {
 }
 
 model TodoList {
-  id    Int    @id @default(autoincrement())
-  name  String
-  todos Todo[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  todos     Todo[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model Todo {
   id             Int       @id @default(autoincrement())
-  name           String
-  completed      Boolean
+  name           String?
+  completed      Boolean?  @default(false)
   completionDate DateTime?
   todoList       TodoList? @relation(fields: [todoListId], references: [id])
   todoListId     Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
 }
