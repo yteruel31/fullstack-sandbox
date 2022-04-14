@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -33,9 +34,9 @@ export const TodoLists = ({ style }) => {
     <Fragment>
       <Card style={style}>
         <CardContent>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <Stack direction="row" alignItems="center">
             <TextField
-              sx={{ flexGrow: 1, marginTop: "1rem" }}
+              fullWidth
               label="What list?"
               value={todoListName}
               onChange={(event) => {
@@ -43,16 +44,17 @@ export const TodoLists = ({ style }) => {
               }}
             />
             <Button
-              sx={{ margin: "8px" }}
               size="small"
               color="secondary"
               onClick={() => addTodoList({ name: todoListName })}
             >
               <AddIcon /> Add List
             </Button>
-          </div>
+          </Stack>
 
-          <Typography component="h2">My Todo Lists</Typography>
+          <Typography component="h2" mt={2}>
+            My Todo Lists
+          </Typography>
 
           <List>
             {data.map((l, index) => (

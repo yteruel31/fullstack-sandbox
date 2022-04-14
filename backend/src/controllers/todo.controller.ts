@@ -6,8 +6,6 @@ export async function create(req: Request, res: Response) {
     try {
         const todo = await prisma.todo.create({
             data: {
-                name: req.body.name,
-                completed: false,
                 todoList: {
                     connect: {
                         id: Number(req.body.idList),

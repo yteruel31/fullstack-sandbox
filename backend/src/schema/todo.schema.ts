@@ -1,4 +1,4 @@
-import { object, string, boolean } from "zod";
+import { object, string, boolean, number } from "zod";
 
 const params = {
     params: object({
@@ -10,8 +10,8 @@ const params = {
 
 export const createTodoSchema = object({
     body: object({
-        name: string({
-            required_error: "Name is required",
+        idList: number({
+            required_error: "IdList is required",
         }),
     }),
 });

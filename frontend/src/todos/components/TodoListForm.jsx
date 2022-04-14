@@ -40,7 +40,7 @@ export const TodoListForm = ({ todoListId }) => {
             <Button
               type="button"
               color="primary"
-              onClick={() => addTodo({ name: "", idList: todoListId })}
+              onClick={() => addTodo({ idList: todoListId })}
             >
               Add Todo <AddIcon />
             </Button>
